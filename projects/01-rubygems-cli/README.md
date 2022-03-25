@@ -17,7 +17,7 @@ sudo ln -s $(pwd)/cli.rb /usr/local/bin
 ### Get available options
 
 ```bash
-cli.rb -h
+cli.rb
 ```
 
 ## Topics to discuss

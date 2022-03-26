@@ -4,13 +4,13 @@ require './lib/ruby_gems_api'
 RSpec.describe RubyGemsApi do
   subject(:api) { described_class }
 
-  describe '.get_gem_info' do
-    subject(:get_gem_info) { api.get_gem_info(gem_name) }
+  describe '.gem_info' do
+    subject(:gem_info) { api.gem_info(gem_name) }
 
     context 'with existing gem' do
       let(:gem_name) { 'rspec' }
       it 'returns rpsec info' do
-        result = get_gem_info
+        result = gem_info
         expect(result['name']).to eq "rspec"
         expect(result['info']).to eq "BDD for Ruby"
       end
@@ -19,21 +19,21 @@ RSpec.describe RubyGemsApi do
     context 'with non existing gem' do
       let(:gem_name) { 'not_existing_gem' }
       it 'raises GemNotFound' do
-        expect {get_gem_info}.to raise_error(GemNotFound)
+        expect {gem_info}.to raise_error(GemNotFound)
       end
     end
 
     context 'with gem name empty' do
       let(:gem_name) { '' }
       it 'raises ArgumentError' do
-        expect {get_gem_info}.to raise_error(ArgumentError)
+        expect {gem_info}.to raise_error(ArgumentError)
       end
     end
 
     context 'with gem name nil' do
       let(:gem_name) { nil }
       it 'raises ArgumentError' do
-        expect {get_gem_info}.to raise_error(ArgumentError)
+        expect {gem_info}.to raise_error(ArgumentError)
       end
     end
 
@@ -41,7 +41,7 @@ RSpec.describe RubyGemsApi do
       let(:gem_name) { 'it_does_not_matter' }
       it 'raises BadRequest on failed request', :skip do
         # TODO: Mock RubyGems webserver
-        expect {get_gem_info}.to raise_error(BadRequest)
+        expect {gem_info}.to raise_error(BadRequest)
       end
     end
   end
@@ -85,7 +85,7 @@ RSpec.describe RubyGemsApi do
       let(:gem_name) { 'it_does_not_matter' }
       it 'raises BadRequest on failed request', :skip do
         # TODO: Mock RubyGems webserver
-        expect {get_gem_info}.to raise_error(BadRequest)
+        expect {gem_info}.to raise_error(BadRequest)
       end
     end
   end

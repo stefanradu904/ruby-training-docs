@@ -1,8 +1,12 @@
 class CommandResult
-    attr_accessor :output, :exit_code
+    attr_accessor :exit_code
 
-    def initialize(output, exit_code)
-        @output = output
+    def initialize(exit_code)
         @exit_code = exit_code
+    end
+
+    def output
+        # TODO: find a way to make this method mandatory overwritable
+        nil
     end
 end

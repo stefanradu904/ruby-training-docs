@@ -2,10 +2,11 @@ require './lib/command_result'
 require './lib/ruby_gems_api'
 
 class ShowCommand
-    class ShowCommandResult
+    class ShowCommandResult < CommandResult
         attr_accessor :gem_name, :info
 
-        def initialize(gem_name, info)
+        def initialize(gem_name, info, exit_code = 0)
+            super(exit_code)
             @gem_name = gem_name
             @info = info
         end
@@ -18,8 +19,7 @@ class ShowCommand
     class << self
         def execute(arg)
             result = RubyGemsApi.gem_info(arg)
-            show_result = ShowCommandResult.new(result['name'], result['info'])
-            CommandResult.new(show_result, 0)
+            ShowCommandResult.new(result['name'], result['info'])
         end
     end
 end

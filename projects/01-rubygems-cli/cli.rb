@@ -1,5 +1,5 @@
 require './lib/program'
 
 result = Program.execute(ARGV)
-puts(result.output.output)
+puts(result.output)
 exit(result.exit_code)

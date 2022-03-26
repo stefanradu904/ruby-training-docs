@@ -2,11 +2,12 @@ require './lib/command_result'
 require './lib/ruby_gems_api'
 
 class SearchCommand
-    class SearchCommandResult
+    class SearchCommandResult < CommandResult
         attr_accessor :gem_names
 
-        def initialize(gem_names)
-            @gem_names = gem_names
+        def initialize(gem_names, exit_code = 0)
+          super(exit_code)
+          @gem_names = gem_names
         end
 
         def output
@@ -22,8 +23,7 @@ class SearchCommand
       def execute(arg)
           result = RubyGemsApi.search_gems(arg)
           gem_names = result.map { |gem| gem['name'] }
-          search_result = SearchCommandResult.new(gem_names)
-          return CommandResult.new(search_result, 0)
+          SearchCommandResult.new(gem_names)
       end
     end
 end

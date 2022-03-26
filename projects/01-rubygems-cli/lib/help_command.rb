@@ -2,10 +2,11 @@ require './lib/command_result'
 require './lib/ruby_gems_api'
 
 class HelpCommand
-    class HelpCommandResult
+    class HelpCommandResult < CommandResult
         attr_accessor :help_message
 
-        def initialize(help_message)
+        def initialize(help_message, exit_code = 0)
+          super(exit_code)
           @help_message = help_message
         end
 
@@ -26,8 +27,7 @@ class HelpCommand
               "search [KEYWORD]",
               "Display a list of all gems that match the specified keyword")
 
-          help_result = HelpCommandResult.new(help_message)
-          CommandResult.new(help_result, 0)
+          HelpCommandResult.new(help_message)
         end
     end
 end

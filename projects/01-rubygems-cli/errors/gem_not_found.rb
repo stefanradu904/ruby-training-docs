@@ -1,0 +1,2 @@
+class GemNotFound < StandardError
+end

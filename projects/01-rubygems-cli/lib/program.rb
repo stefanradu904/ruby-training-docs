@@ -1,5 +1,6 @@
 require './lib/show_command'
 require './lib/search_command'
+require './lib/help_command'
 
 class Program
     class << self
@@ -9,6 +10,8 @@ class Program
                 ShowCommand.execute(argv[1])
             when "search"
                 SearchCommand.execute(argv[1])
+            when "help"
+                HelpCommand.execute
             else
                 CommandResult.new("Invalid option #{argv[0]}", 1)
             end

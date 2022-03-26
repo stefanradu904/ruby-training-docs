@@ -8,6 +8,14 @@ class SearchCommand
         def initialize(gem_names)
             @gem_names = gem_names
         end
+
+        def output
+          result = ''
+          gem_names.each_with_index do |name, i|
+            result += "#{i + 1}. #{name}\n"
+          end
+          result
+        end
     end
 
     class << self

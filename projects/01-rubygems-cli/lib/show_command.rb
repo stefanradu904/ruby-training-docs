@@ -9,6 +9,10 @@ class ShowCommand
             @gem_name = gem_name
             @info = info
         end
+
+        def output
+            "#{gem_name}\n#{info}"
+        end
     end
 
     class << self

@@ -7,36 +7,86 @@ RSpec.describe RubyGemsApi do
   describe '.get_gem_info' do
     subject(:get_gem_info) { api.get_gem_info(gem_name) }
 
-    context 'when the gem exists' do
+    context 'with existing gem' do
       let(:gem_name) { 'rspec' }
       it 'returns rpsec info' do
-        result = RubyGemsApi.get_gem_info(gem_name)
+        result = get_gem_info
         expect(result['name']).to eq "rspec"
         expect(result['info']).to eq "BDD for Ruby"
       end
     end
 
-    context 'when the gem does not exist' do
+    context 'with non existing gem' do
       let(:gem_name) { 'not_existing_gem' }
       it 'raises GemNotFound' do
         expect {get_gem_info}.to raise_error(GemNotFound)
       end
     end
-  end
 
-  describe 'Search valid keyword' do
-    let(:keyword) { "ana" }
-    it 'returns array of 30 gems found' do
-      result = RubyGemsApi.search_gems(keyword)
-      expect(result.size).to eq 30
+    context 'with gem name empty' do
+      let(:gem_name) { '' }
+      it 'raises ArgumentError' do
+        expect {get_gem_info}.to raise_error(ArgumentError)
+      end
+    end
+
+    context 'with gem name nil' do
+      let(:gem_name) { nil }
+      it 'raises ArgumentError' do
+        expect {get_gem_info}.to raise_error(ArgumentError)
+      end
+    end
+
+    context 'with Ruby Gems webserver down or API problems' do
+      let(:gem_name) { 'it_does_not_matter' }
+      it 'raises BadRequest on failed request', :skip do
+        # TODO: Mock RubyGems webserver
+        expect {get_gem_info}.to raise_error(BadRequest)
+      end
     end
   end
 
-  describe 'Search an invalid keyword' do
-    let(:keyword) { "invalid_keyword" }
-    it 'returns empty array' do
-      result = RubyGemsApi.search_gems(keyword)
-      expect(result.size).to eq 0
+  describe '.search_gems' do
+    subject(:search_gems) { api.search_gems(keyword) }
+
+    context 'with keyword valid' do
+      let(:keyword) { 'rspec' }
+      it 'returns a non empty array of json objects' do
+        result = search_gems
+        expect(result.class).to be Array
+        expect(result.size).not_to eq 0
+      end
+    end
+
+    context 'with keyword invalid' do
+      let(:keyword) { 'not_existing_gem' }
+      it 'returns an empty array' do
+        result = search_gems
+        expect(result.class).to be Array
+        expect(result.size).to eq 0
+      end
+    end
+
+    context 'with keyword empty' do
+      let(:keyword) { '' }
+      it 'raises ArgumentError' do
+        expect {search_gems}.to raise_error(ArgumentError)
+      end
+    end
+
+    context 'with keyword nil' do
+      let(:keyword) { nil }
+      it 'raises ArgumentError' do
+        expect {search_gems}.to raise_error(ArgumentError)
+      end
+    end
+
+    context 'with Ruby Gems webserver down or API problems' do
+      let(:gem_name) { 'it_does_not_matter' }
+      it 'raises BadRequest on failed request', :skip do
+        # TODO: Mock RubyGems webserver
+        expect {get_gem_info}.to raise_error(BadRequest)
+      end
     end
   end
 end

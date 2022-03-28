@@ -15,7 +15,7 @@ class HelpCommand
     end
   end
 
-    class << self
+  class << self
     def execute()
       help_message = sprintf("Usage example:\n")
       help_message += sprintf("%4s%-20s %s\n",

@@ -15,6 +15,7 @@ class SearchCommand
       gem_names.each_with_index do |name, i|
         result += "#{i + 1}. #{name}\n"
       end
+      
       result
     end
   end
@@ -23,6 +24,7 @@ class SearchCommand
     def execute(arg)
       result = RubyGemsApi.search_gems(arg)
       gem_names = result.map { |gem| gem['name'] }
+
       SearchCommandResult.new(gem_names)
     end
   end

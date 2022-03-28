@@ -19,6 +19,7 @@ class ShowCommand
   class << self
     def execute(arg)
       result = RubyGemsApi.gem_info(arg)
+      
       ShowCommandResult.new(result['name'], result['info'])
     end
   end

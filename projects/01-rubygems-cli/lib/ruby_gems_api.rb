@@ -6,7 +6,7 @@ require './errors/bad_request'
 
 class RubyGemsApi
   @connection = Faraday.new('https://rubygems.org') do |faraday|
-      faraday.adapter :net_http
+    faraday.adapter :net_http
   end
 
   class << self

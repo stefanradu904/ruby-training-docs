@@ -19,21 +19,21 @@ RSpec.describe RubyGemsApi do
     context 'with non existing gem' do
       let(:gem_name) { 'not_existing_gem' }
       it 'raises GemNotFound' do
-        expect {gem_info}.to raise_error(GemNotFound)
+        expect { gem_info }.to raise_error(GemNotFound)
       end
     end
 
     context 'with gem name empty' do
       let(:gem_name) { '' }
       it 'raises ArgumentError' do
-        expect {gem_info}.to raise_error(ArgumentError)
+        expect { gem_info }.to raise_error(ArgumentError)
       end
     end
 
     context 'with gem name nil' do
       let(:gem_name) { nil }
       it 'raises ArgumentError' do
-        expect {gem_info}.to raise_error(ArgumentError)
+        expect { gem_info }.to raise_error(ArgumentError)
       end
     end
 
@@ -41,7 +41,7 @@ RSpec.describe RubyGemsApi do
       let(:gem_name) { 'it_does_not_matter' }
       it 'raises BadRequest on failed request', :skip do
         # TODO: Mock RubyGems webserver
-        expect {gem_info}.to raise_error(BadRequest)
+        expect { gem_info }.to raise_error(BadRequest)
       end
     end
   end
@@ -70,14 +70,14 @@ RSpec.describe RubyGemsApi do
     context 'with keyword empty' do
       let(:keyword) { '' }
       it 'raises ArgumentError' do
-        expect {search_gems}.to raise_error(ArgumentError)
+        expect { search_gems }.to raise_error(ArgumentError)
       end
     end
 
     context 'with keyword nil' do
       let(:keyword) { nil }
       it 'raises ArgumentError' do
-        expect {search_gems}.to raise_error(ArgumentError)
+        expect { search_gems }.to raise_error(ArgumentError)
       end
     end
 
@@ -85,7 +85,7 @@ RSpec.describe RubyGemsApi do
       let(:gem_name) { 'it_does_not_matter' }
       it 'raises BadRequest on failed request', :skip do
         # TODO: Mock RubyGems webserver
-        expect {gem_info}.to raise_error(BadRequest)
+        expect { gem_info }.to raise_error(BadRequest)
       end
     end
   end

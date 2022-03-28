@@ -1,4 +1,4 @@
-require './lib/command_results/command_result'
+require "./lib/command_results/command_result"
 
 class SearchCommandResult < CommandResult
   attr_accessor :gem_names
@@ -9,7 +9,7 @@ class SearchCommandResult < CommandResult
   end
 
   def output
-    result = ''
+    result = ""
     gem_names.each_with_index do |name, i|
       result += "#{i + 1}. #{name}\n"
     end

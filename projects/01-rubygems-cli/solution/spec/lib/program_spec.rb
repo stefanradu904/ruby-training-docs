@@ -1,19 +1,19 @@
-require 'spec_helper'
-require './lib/program'
-require './lib/command_results/command_error_result'
-require './lib/command_results/show_command_result'
-require './lib/command_results/search_command_result'
+require "spec_helper"
+require "./lib/program"
+require "./lib/command_results/command_error_result"
+require "./lib/command_results/show_command_result"
+require "./lib/command_results/search_command_result"
 
 RSpec.describe Program do
   subject(:program) { described_class }
 
-  describe '.execute' do
+  describe ".execute" do
     subject(:execute) { program.execute(argv)}
 
-    context 'with non existing command name' do
-      let(:argv) { ['non_existing_command'] }
+    context "with non existing command name" do
+      let(:argv) { ["non_existing_command"] }
 
-      it 'returns CommandErrorResult' do
+      it "returns CommandErrorResult" do
         result = execute
 
         expect(result.class).to be CommandErrorResult
@@ -22,10 +22,10 @@ RSpec.describe Program do
       end
     end
 
-    context 'with nil command name' do
+    context "with nil command name" do
       let(:argv) { [nil] }
 
-      it 'returns CommandErrorResult' do
+      it "returns CommandErrorResult" do
         result = execute
         
         expect(result.class).to be CommandErrorResult
@@ -34,10 +34,10 @@ RSpec.describe Program do
       end
     end
 
-    context 'with empty command name' do
-      let(:argv) { [''] }
+    context "with empty command name" do
+      let(:argv) { [""] }
 
-      it 'returns CommandErrorResult' do
+      it "returns CommandErrorResult" do
         result = execute
         
         expect(result.class).to be CommandErrorResult
@@ -46,10 +46,10 @@ RSpec.describe Program do
       end
     end
 
-    context 'with nil argv array' do
+    context "with nil argv array" do
       let(:argv) { nil }
 
-      it 'returns CommandErrorResult' do
+      it "returns CommandErrorResult" do
         result = execute
         
         expect(result.class).to be CommandErrorResult
@@ -58,45 +58,45 @@ RSpec.describe Program do
       end
     end
 
-    context 'with show existing gem' do
-      let(:argv) { ['show', 'rspec'] }
+    context "with show existing gem" do
+      let(:argv) { ["show", "rspec"] }
 
-      it 'returns ShowCommandResult' do
+      it "returns ShowCommandResult" do
         result = execute
 
         expect(result.class).to be ShowCommandResult
-        expect(result.gem_name).to eq 'rspec'
-        expect(result.info).to eq 'BDD for Ruby'
+        expect(result.gem_name).to eq "rspec"
+        expect(result.info).to eq "BDD for Ruby"
         expect(result.exit_code).to eq 0
       end
     end
 
-    context 'with show inexisting gem' do
-      let(:argv) { ['show', 'non_existing_gem'] }
+    context "with show inexisting gem" do
+      let(:argv) { ["show", "non_existing_gem"] }
 
-      it 'raises GemNotFound' do
+      it "raises GemNotFound" do
         # TODO: catch exception in ShowCommand
         expect { execute }.to raise_error(GemNotFound)
       end
     end
 
-    context 'with show command but multiple arguments' do
-      let(:argv) { ['show', 'rspec', 'sinatra', 'rails'] }
+    context "with show command but multiple arguments" do
+      let(:argv) { ["show", "rspec", "sinatra", "rails"] }
 
-      it 'returns ShowCommandResult for the first argument' do
+      it "returns ShowCommandResult for the first argument" do
         result = execute
 
         expect(result.class).to be ShowCommandResult
-        expect(result.gem_name).to eq 'rspec'
-        expect(result.info).to eq 'BDD for Ruby'
+        expect(result.gem_name).to eq "rspec"
+        expect(result.info).to eq "BDD for Ruby"
         expect(result.exit_code).to eq 0
       end
     end
 
-    context 'with search valid keyword' do
-      let(:argv) { ['search', 'rspec'] }
+    context "with search valid keyword" do
+      let(:argv) { ["search", "rspec"] }
 
-      it 'returns SearchCommandResult' do
+      it "returns SearchCommandResult" do
         result = execute
 
         expect(result.class).to be SearchCommandResult
@@ -105,10 +105,10 @@ RSpec.describe Program do
       end
     end
 
-    context 'with search invalid keyword' do
-      let(:argv) { ['search', 'non_existing_gem'] }
+    context "with search invalid keyword" do
+      let(:argv) { ["search", "non_existing_gem"] }
 
-      it 'raises SearchCommandResult' do
+      it "raises SearchCommandResult" do
         result = execute
 
         expect(result.class).to be SearchCommandResult
@@ -118,10 +118,10 @@ RSpec.describe Program do
       end
     end
 
-    context 'with search command but multiple arguments' do
-      let(:argv) { ['search', 'rspec', 'sinatra', 'rails'] }
+    context "with search command but multiple arguments" do
+      let(:argv) { ["search", "rspec", "sinatra", "rails"] }
 
-      it 'returns SearchCommandResult for the first argument' do
+      it "returns SearchCommandResult for the first argument" do
         result = execute
 
         expect(result.class).to be SearchCommandResult

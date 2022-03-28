@@ -1,11 +1,11 @@
-require 'faraday'
-require 'faraday/net_http'
-require 'json'
-require './errors/gem_not_found'
-require './errors/bad_request'
+require "faraday"
+require "faraday/net_http"
+require "json"
+require "./errors/gem_not_found"
+require "./errors/bad_request"
 
 class RubyGemsApi
-  @connection = Faraday.new('https://rubygems.org') do |faraday|
+  @connection = Faraday.new("https://rubygems.org") do |faraday|
     faraday.adapter :net_http
   end
 

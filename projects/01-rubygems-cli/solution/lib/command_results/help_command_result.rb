@@ -1,4 +1,4 @@
-require './lib/command_results/command_result'
+require "./lib/command_results/command_result"
 
 class HelpCommandResult < CommandResult
   class << self

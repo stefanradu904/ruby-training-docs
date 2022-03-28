@@ -1,4 +1,4 @@
-require './lib/program'
+require "./lib/program"
 
 result = Program.execute(ARGV)
 puts(result.output)

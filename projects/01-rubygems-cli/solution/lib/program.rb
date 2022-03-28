@@ -1,10 +1,13 @@
 require './lib/show_command'
 require './lib/search_command'
 require './lib/help_command'
+require './lib/command_results/command_error_result'
 
 class Program
   class << self
     def execute(argv)
+      return CommandErrorResult.new("No command provided!", 1) if argv.nil? || argv[0].nil? || argv[0].empty?
+
       case argv[0]
       when "show"
         ShowCommand.execute(argv[1])
@@ -13,7 +16,7 @@ class Program
       when "help"
         HelpCommand.execute
       else
-        CommandResult.new("Invalid option #{argv[0]}", 1)
+        CommandErrorResult.new("Invalid option #{argv[0]}!", 1)
       end
     end
   end

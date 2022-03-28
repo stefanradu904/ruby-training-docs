@@ -2,12 +2,19 @@ require 'spec_helper'
 require './lib/show_command'
 
 RSpec.describe ShowCommand do
-  describe 'Execute with rspec argument' do
-    let(:arg) { "rspec" }
-    it 'returns command result with rspec info and error code success' do
-      result = ShowCommand.execute(arg)
-      expect(result.output).to be_a(ShowCommand::ShowCommandResult)
-      expect(result.exit_code).to eq 0
+  subject(:program) { described_class }
+
+  describe '.execute' do
+    subject(:execute) { program.execute(arg) }
+
+    context 'with existing gem' do
+      let(:arg) { "rspec" }
+
+      it 'returns ShowCommandResult' do
+        result = execute
+
+        expect(result.class).to be ShowCommandResult
+      end
     end
   end
 end

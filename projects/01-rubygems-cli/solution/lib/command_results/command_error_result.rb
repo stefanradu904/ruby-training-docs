@@ -9,6 +9,6 @@ class CommandErrorResult < HelpCommandResult
   end
 
   def output
-    error_message + "\n" + @@help_message
+    error_message + "\n" + super
   end
 end

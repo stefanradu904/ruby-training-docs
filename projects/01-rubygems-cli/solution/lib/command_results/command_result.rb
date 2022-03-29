@@ -6,7 +6,5 @@ class CommandResult
   end
 
   def output
-    # TODO: find a way to make this method mandatory overwritable
-    nil
   end
 end

@@ -6,7 +6,7 @@ require "./lib/command_results/command_error_result"
 class Program
   class << self
     def execute(argv)
-      return CommandErrorResult.new("No command provided!", 1) if argv.nil? || argv[0].nil? || argv[0].empty?
+      return CommandErrorResult.new("No command provided!", 1) if argv.empty? || argv[0].nil? || argv[0].empty?
 
       case argv[0]
       when "show"

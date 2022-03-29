@@ -46,8 +46,8 @@ RSpec.describe Program do
       end
     end
 
-    context "with nil argv array" do
-      let(:argv) { nil }
+    context "with empty argv array" do
+      let(:argv) { [] }
 
       it "returns CommandErrorResult" do
         result = execute

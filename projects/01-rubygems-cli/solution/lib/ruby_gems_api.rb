@@ -14,7 +14,7 @@ class RubyGemsApi
       raise ArgumentError.new("Invalid gem name provided.") if gem_name.nil? || gem_name.empty?
       
       response = @connection.get("/api/v1/gems/#{gem_name}.json")
-      raise GemNotFoundError.new("Gem #{gem_name} not found.") if response.body == "This rubygem could not be found."
+      raise GemNotFoundError.new("Gem #{gem_name} not found.") if response.status == 404
       
       raise StandardAPIError.new("An API error occurred.") if response.status != 200
       

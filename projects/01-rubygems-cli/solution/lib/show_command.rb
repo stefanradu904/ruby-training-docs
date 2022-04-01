@@ -15,5 +15,3 @@ class ShowCommand
     end
   end
 end
-
-ShowCommand.execute("sdjdhfgsjdf")

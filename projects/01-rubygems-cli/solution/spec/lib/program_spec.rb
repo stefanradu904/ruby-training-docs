@@ -83,13 +83,11 @@ RSpec.describe Program do
     context "with show command but multiple arguments" do
       let(:argv) { ["show", "rspec", "sinatra", "rails"] }
 
-      it "returns ShowCommandResult for the first argument" do
+      it "returns CommandErrorResult" do
         result = execute
 
-        expect(result.class).to be ShowCommandResult
-        expect(result.gem_name).to eq "rspec"
-        expect(result.info).to eq "BDD for Ruby"
-        expect(result.exit_code).to eq 0
+        expect(result.class).to be CommandErrorResult
+        expect(result.exit_code).not_to eq 0
       end
     end
 
@@ -124,9 +122,8 @@ RSpec.describe Program do
       it "returns SearchCommandResult for the first argument" do
         result = execute
 
-        expect(result.class).to be SearchCommandResult
-        expect(result.gem_names.size).not_to eq 0
-        expect(result.exit_code).to eq 0
+        expect(result.class).to be CommandErrorResult
+        expect(result.exit_code).not_to eq 0
       end
     end
   end

@@ -7,13 +7,12 @@ class Program
   class << self
     def execute(argv)
       return CommandErrorResult.new("No command provided!", 1) if argv.empty? || argv[0].nil? || argv[0].empty?
-      return CommandErrorResult.new("Too many arguments!", 1) if argv.size > 2
 
       case argv[0]
       when "show"
-        ShowCommand.execute(argv[1])
+        ShowCommand.execute(argv[1..])
       when "search"
-        SearchCommand.execute(argv[1])
+        SearchCommand.execute(argv[1..])
       when "help"
         HelpCommand.execute
       else

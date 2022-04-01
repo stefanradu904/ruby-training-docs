@@ -2,9 +2,16 @@
 
 require "./lib/command_results/command_result"
 
-HELP_MESSAGE = "Usage example:\n" \
+HELP_MESSAGE = "Usage: cli.rb [COMMAND]... [OPTIONS]...\n" \
+  "Commands:\n" \
   "    show [GEM NAME]    Display details about specified gem\n" \
-  "    search [KEYWORD]   Display a list of all gems that match the specified keyword\n"
+  "    search [KEYWORD]   Display a list of all gems that match the specified keyword\n" \
+  "\n" \
+  "Options:\n" \
+  "    <search> --license LICENSE\n" \
+  "           Filter gems by specified license.\n" \
+  "    <search> --most-downloads-first\n" \
+  "           Order gems starting with the downloaded first.\n"           
 
 class HelpCommandResult < CommandResult
   def initialize(exit_code = 0)

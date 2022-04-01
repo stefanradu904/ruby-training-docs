@@ -100,7 +100,7 @@ RSpec.describe Program do
         result = execute
 
         expect(result.class).to be SearchCommandResult
-        expect(result.gem_names.size).not_to eq 0
+        expect(result.gems.size).not_to eq 0
         expect(result.exit_code).to eq 0
       end
     end
@@ -112,8 +112,8 @@ RSpec.describe Program do
         result = execute
 
         expect(result.class).to be SearchCommandResult
-        expect(result.gem_names.class).to be Array
-        expect(result.gem_names.size).to eq 0
+        expect(result.gems.class).to be Array
+        expect(result.gems.size).to eq 0
         expect(result.exit_code).to eq 0
       end
     end

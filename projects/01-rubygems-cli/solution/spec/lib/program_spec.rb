@@ -74,9 +74,9 @@ RSpec.describe Program do
     context "with show inexisting gem" do
       let(:argv) { ["show", "non_existing_gem"] }
 
-      it "raises GemNotFound" do
+      it "raises GemNotFoundError" do
         # TODO: catch exception in ShowCommand
-        expect { execute }.to raise_error(GemNotFound)
+        expect { execute }.to raise_error(GemNotFoundError)
       end
     end
 

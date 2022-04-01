@@ -18,8 +18,8 @@ RSpec.describe RubyGemsApi do
 
     context "with non existing gem" do
       let(:gem_name) { "not_existing_gem" }
-      it "raises GemNotFound" do
-        expect { gem_info }.to raise_error(GemNotFound)
+      it "raises GemNotFoundError" do
+        expect { gem_info }.to raise_error(GemNotFoundError)
       end
     end
 
@@ -39,9 +39,9 @@ RSpec.describe RubyGemsApi do
 
     context "with Ruby Gems webserver down or API problems" do
       let(:gem_name) { "it_does_not_matter" }
-      it "raises BadRequest on failed request", :skip do
+      it "raises StandardAPIError on failed request", :skip do
         # TODO: Mock RubyGems webserver
-        expect { gem_info }.to raise_error(BadRequest)
+        expect { gem_info }.to raise_error(StandardAPIError)
       end
     end
   end
@@ -83,9 +83,9 @@ RSpec.describe RubyGemsApi do
 
     context "with Ruby Gems webserver down or API problems" do
       let(:gem_name) { "it_does_not_matter" }
-      it "raises BadRequest on failed request", :skip do
+      it "raises StandardAPIError on failed request", :skip do
         # TODO: Mock RubyGems webserver
-        expect { gem_info }.to raise_error(BadRequest)
+        expect { gem_info }.to raise_error(StandardAPIError)
       end
     end
   end

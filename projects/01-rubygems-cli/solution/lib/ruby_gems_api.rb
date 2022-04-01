@@ -1,8 +1,8 @@
 require "faraday"
 require "faraday/net_http"
 require "json"
-require "./errors/gem_not_found"
-require "./errors/bad_request"
+require "./errors/gem_not_found_error"
+require "./errors/standard_api_error"
 
 class RubyGemsApi
   @connection = Faraday.new("https://rubygems.org") do |faraday|
@@ -14,9 +14,9 @@ class RubyGemsApi
       raise ArgumentError.new("Invalid gem name provided.") if gem_name.nil? || gem_name.empty?
       
       response = @connection.get("/api/v1/gems/#{gem_name}.json")
-      raise GemNotFound.new("Gem #{gem_name} not found.") if response.body == "This rubygem could not be found."
+      raise GemNotFoundError.new("Gem #{gem_name} not found.") if response.body == "This rubygem could not be found."
       
-      raise BadRequest.new("Bad request.") if response.status != 200
+      raise StandardAPIError.new("An API error occurred.") if response.status != 200
       
       JSON.parse(response.body)
     end
@@ -25,7 +25,7 @@ class RubyGemsApi
       raise ArgumentError.new("Invalid keyword provided.") if keyword.nil? || keyword.empty?
 
       response = @connection.get("/api/v1/search.json", {query: keyword})
-      raise BadRequest.new("Bad request.") if response.status != 200
+      raise StandardAPIError.new("An API error occurred.") if response.status != 200
 
       JSON.parse(response.body)
     end

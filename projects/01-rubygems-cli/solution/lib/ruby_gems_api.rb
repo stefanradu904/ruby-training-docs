@@ -7,6 +7,7 @@ require "./errors/standard_api_error"
 class RubyGemsApi
   @connection = Faraday.new("https://rubygems.org") do |faraday|
     faraday.adapter :net_http
+    faraday.request :authorization, "Bearer", ENV['RUBYGEMS_API_KEY']
   end
 
   class << self

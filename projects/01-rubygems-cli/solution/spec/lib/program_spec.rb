@@ -138,5 +138,15 @@ RSpec.describe Program do
         expect(result.gems.each_cons(2).all? { |a, b| a.downloads > b.downloads }).to be true
       end
     end
+
+    context 'with --license option' do
+      let(:argv) { ["search", "rspec", "--license", "MIT"] }
+
+      it "returns Search::Result and specified license" do
+        result = execute
+
+        expect(result.gems.all? { |a| a.licenses.include?('MIT') }).to be true
+      end
+    end
   end
 end

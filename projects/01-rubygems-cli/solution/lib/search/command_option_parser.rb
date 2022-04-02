@@ -3,7 +3,7 @@ require "optparse"
 module Search
   class CommandOptionParser
     class << self
-      def parse(options)
+      def parse(args)
         options = { :most_downloads_first => false, :license => nil }
 
         OptionParser.new do |opts|
@@ -16,7 +16,7 @@ module Search
                   "Filter gems by specified license.") do |license|
             options[:license] = license
           end
-        end.parse!(into: options)
+        end.parse!(args, into: options)
 
         options
       end

@@ -128,5 +128,15 @@ RSpec.describe Program do
         expect(result.exit_code).not_to eq 0
       end
     end
+
+    context 'with --most-downloads-first option' do
+      let(:argv) { ["search", "rspec", "--most-downloads-first"] }
+
+      it "returns Search::Result and gems ordered by downloads" do
+        result = execute
+
+        expect(result.gems.each_cons(2).all? { |a, b| a.downloads > b.downloads }).to be true
+      end
+    end
   end
 end

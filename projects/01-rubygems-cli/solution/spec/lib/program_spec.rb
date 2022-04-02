@@ -145,7 +145,7 @@ RSpec.describe Program do
       it "returns Search::Result and specified license" do
         result = execute
 
-        expect(result.gems.all? { |a| a.licenses.include?('MIT') }).to be true
+        expect(result.gems.all? { |a| a.license?('MIT') }).to be true
       end
     end
   end

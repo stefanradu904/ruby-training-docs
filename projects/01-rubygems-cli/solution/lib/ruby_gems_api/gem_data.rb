@@ -8,5 +8,9 @@ module RubyGemsApi
       @downloads = gem_data["downloads"]
       @licenses = gem_data["licenses"]
     end
+
+    def license?(license)
+      licenses.include?(license)
+    end
   end
 end

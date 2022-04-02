@@ -3,6 +3,7 @@ require "faraday/net_http"
 require "json"
 require "./lib/ruby_gems_api/gem_not_found_error"
 require "./lib/ruby_gems_api/standard_api_error"
+require "./lib/ruby_gems_api/gem_data"
 
 module RubyGemsApi
   class Client
@@ -30,6 +31,7 @@ module RubyGemsApi
         raise StandardAPIError.new("An API error occurred.") if response.status != 200
 
         JSON.parse(response.body)
+            .map { |gem_data| GemData.new(gem_data)}
       end
     end
   end

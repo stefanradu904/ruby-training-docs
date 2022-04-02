@@ -55,6 +55,9 @@ RSpec.describe RubyGemsApi::Client do
         result = search_gems
         expect(result.class).to be Array
         expect(result.size).not_to eq 0
+
+        expect(result.first.name).to eq 'rspec'
+        expect(result.first.info).to eq "BDD for Ruby"
       end
     end
 

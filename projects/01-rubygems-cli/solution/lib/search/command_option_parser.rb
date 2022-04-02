@@ -1,22 +1,24 @@
+require "./lib/search/most_downloads_option"
+require "./lib/search/license_option"
 require "optparse"
 
 module Search
   class CommandOptionParser
     class << self
       def parse(args)
-        options = { :most_downloads_first => false, :license => nil }
+        options = []
 
         OptionParser.new do |opts|
           opts.on("--most-downloads-first",
                   "Order gems starting with the downloaded first.") do
-            options[:most_downloads_first] = true
+            options << MostDownloadsOption.new
           end
 
           opts.on("--license LICENSE",
                   "Filter gems by specified license.") do |license|
-            options[:license] = license
+            options << LicenseOption.new(license)
           end
-        end.parse!(args, into: options)
+        end.parse!(args)
 
         options
       end

@@ -11,13 +11,7 @@ module Search
         options = Search::CommandOptionParser.parse(argv[1..])
 
         gems = RubyGemsApi::Client.search_gems(argv[0])
-
-        if options[:most_downloads_first] == true
-          gems.sort! { |a,b| b.downloads <=> a.downloads }
-        end
-        if !options[:license].nil?
-          gems.reject! { |gem| !gem.licenses.include?(options[:license]) if !gem.licenses.nil? }
-        end
+        gems = options.reduce(gems) { |result, option| option.apply(result) }
 
         Search::Result.new(gems)
       rescue StandardError => e

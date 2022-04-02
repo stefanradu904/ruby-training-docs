@@ -22,6 +22,7 @@ module RubyGemsApi
         raise StandardAPIError.new("An API error occurred.") if response.status != 200
 
         JSON.parse(response.body)
+            .then { |json| GemData.new(json) }
       end
 
       def search_gems(keyword)
@@ -31,7 +32,7 @@ module RubyGemsApi
         raise StandardAPIError.new("An API error occurred.") if response.status != 200
 
         JSON.parse(response.body)
-            .map { |gem_data| GemData.new(gem_data)}
+            .map { |json| GemData.new(json)}
       end
     end
   end

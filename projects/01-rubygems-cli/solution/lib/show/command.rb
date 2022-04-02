@@ -13,7 +13,7 @@ module Show
         rescue StandardError => e
           Common::ErrorResult.new(e.message)
         else
-          Show::Result.new(result["name"], result["info"])
+          Show::Result.new(result.name, result.info)
         end
       end
     end

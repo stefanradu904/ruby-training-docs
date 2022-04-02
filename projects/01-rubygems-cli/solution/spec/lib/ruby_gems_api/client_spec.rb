@@ -11,8 +11,8 @@ RSpec.describe RubyGemsApi::Client do
       let(:gem_name) { "rspec" }
       it "returns rpsec info" do
         result = gem_info
-        expect(result["name"]).to eq "rspec"
-        expect(result["info"]).to eq "BDD for Ruby"
+        expect(result.name).to eq "rspec"
+        expect(result.info).to eq "BDD for Ruby"
       end
     end
 

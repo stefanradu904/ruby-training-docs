@@ -4,12 +4,13 @@ require "json"
 require "./lib/ruby_gems_api/gem_not_found_error"
 require "./lib/ruby_gems_api/standard_api_error"
 require "./lib/ruby_gems_api/gem_data"
+require "./lib/settings"
 
 module RubyGemsApi
   class Client
     @connection = Faraday.new("https://rubygems.org") do |faraday|
       faraday.adapter :net_http
-      faraday.request :authorization, "Bearer", ENV['RUBYGEMS_API_KEY']
+      faraday.request :authorization, "Bearer", Settings.rubygems_api_key
     end
 
     class << self

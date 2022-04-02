@@ -1,8 +1,7 @@
-
 module Search
   class MostDownloadsOption
     def apply(gems)
-      gems.sort! { |a,b| b.downloads <=> a.downloads }
+      gems.sort_by { |gem| -gem.downloads }
     end
   end
 end

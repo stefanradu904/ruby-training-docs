@@ -118,7 +118,7 @@ RSpec.describe Program do
       end
     end
 
-    context "with search command but multiple arguments" do
+    context "with search command but multiple arguments", skip: true do
       let(:argv) { ["search", "rspec", "sinatra", "rails"] }
 
       it "returns SearchCommandResult for the first argument" do

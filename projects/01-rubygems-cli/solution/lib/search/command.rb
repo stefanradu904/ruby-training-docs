@@ -10,20 +10,18 @@ module Search
 
         options = Search::CommandOptionParser.parse(argv[1..])
 
-        begin
-          gems = RubyGemsApi::Client.search_gems(argv[0])
-        rescue StandardError => e
-          Common::ErrorResult.new(e.message)
-        else
-          if options[:most_downloads_first] == true
-            gems.sort! { |a,b| b.downloads <=> a.downloads }
-          end
-          if !options[:license].nil?
-            gems.reject! { |gem| !gem.licenses.include?(options[:license]) if !gem.licenses.nil? }
-          end
+        gems = RubyGemsApi::Client.search_gems(argv[0])
 
-          Search::Result.new(gems)
+        if options[:most_downloads_first] == true
+          gems.sort! { |a,b| b.downloads <=> a.downloads }
         end
+        if !options[:license].nil?
+          gems.reject! { |gem| !gem.licenses.include?(options[:license]) if !gem.licenses.nil? }
+        end
+
+        Search::Result.new(gems)
+      rescue StandardError => e
+        Common::ErrorResult.new(e.message)
       end
     end
   end

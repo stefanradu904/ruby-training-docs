@@ -8,13 +8,10 @@ module Show
       def execute(argv)
         return Common::ErrorResult.new("Too many arguments!") if argv.size > 2
 
-        begin
-          result = RubyGemsApi::Client.gem_info(argv[0])
-        rescue StandardError => e
-          Common::ErrorResult.new(e.message)
-        else
-          Show::Result.new(result.name, result.info)
-        end
+        result = RubyGemsApi::Client.gem_info(argv[0])
+        Show::Result.new(result.name, result.info)
+      rescue StandardError => e
+        Common::ErrorResult.new(e.message)
       end
     end
   end

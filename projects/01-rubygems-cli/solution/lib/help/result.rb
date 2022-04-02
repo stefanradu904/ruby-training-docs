@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "./lib/command_results/command_result"
+require "./lib/common/result"
 
 HELP_MESSAGE = "Usage: cli.rb [COMMAND]... [OPTIONS]...\n" \
   "Commands:\n" \
@@ -13,12 +13,14 @@ HELP_MESSAGE = "Usage: cli.rb [COMMAND]... [OPTIONS]...\n" \
   "    <search> --most-downloads-first\n" \
   "           Order gems starting with the downloaded first.\n"           
 
-class HelpCommandResult < CommandResult
-  def initialize(exit_code = 0)
-    super(exit_code)
-  end
+module Help
+  class Result < Common::Result
+    def initialize(exit_code = 0)
+      super(exit_code)
+    end
 
-  def output
-    HELP_MESSAGE
+    def output
+      HELP_MESSAGE
+    end
   end
 end

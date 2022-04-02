@@ -1,7 +1,8 @@
 require "spec_helper"
-require "./lib/search_command"
+require "./lib/search/command"
+require "./lib/search/result"
 
-RSpec.describe SearchCommand do
+RSpec.describe Search::Command do
   subject(:program) { described_class }
 
   describe ".execute" do
@@ -10,10 +11,10 @@ RSpec.describe SearchCommand do
     context "with valid keyword" do
       let(:arg) { "rspec" }
 
-      it "returns SearchCommandResult" do
+      it "returns Search::Result" do
         result = execute
 
-        expect(result.class).to be SearchCommandResult
+        expect(result.class).to be Search::Result
       end
     end
   end

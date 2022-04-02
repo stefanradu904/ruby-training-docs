@@ -1,7 +1,7 @@
 require "spec_helper"
-require "./lib/ruby_gems_api"
+require "./lib/ruby_gems_api/client"
 
-RSpec.describe RubyGemsApi do
+RSpec.describe RubyGemsApi::Client do
   subject(:api) { described_class }
 
   describe ".gem_info" do
@@ -19,7 +19,7 @@ RSpec.describe RubyGemsApi do
     context "with non existing gem" do
       let(:gem_name) { "not_existing_gem" }
       it "raises GemNotFoundError" do
-        expect { gem_info }.to raise_error(GemNotFoundError)
+        expect { gem_info }.to raise_error(RubyGemsApi::GemNotFoundError)
       end
     end
 
@@ -41,7 +41,7 @@ RSpec.describe RubyGemsApi do
       let(:gem_name) { "it_does_not_matter" }
       it "raises StandardAPIError on failed request", :skip do
         # TODO: Mock RubyGems webserver
-        expect { gem_info }.to raise_error(StandardAPIError)
+        expect { gem_info }.to raise_error(RubyGemsApi::StandardAPIError)
       end
     end
   end
@@ -85,7 +85,7 @@ RSpec.describe RubyGemsApi do
       let(:gem_name) { "it_does_not_matter" }
       it "raises StandardAPIError on failed request", :skip do
         # TODO: Mock RubyGems webserver
-        expect { gem_info }.to raise_error(StandardAPIError)
+        expect { gem_info }.to raise_error(RubyGemsApi::StandardAPIError)
       end
     end
   end

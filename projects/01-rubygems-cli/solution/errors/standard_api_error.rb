@@ -1,2 +1,0 @@
-class StandardAPIError < StandardError
-end

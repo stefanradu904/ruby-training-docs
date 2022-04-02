@@ -9,7 +9,7 @@ RSpec.describe Search::Command do
     subject(:execute) { program.execute(arg) }
 
     context "with valid keyword" do
-      let(:arg) { "rspec" }
+      let(:arg) { ["rspec"] }
 
       it "returns Search::Result" do
         result = execute

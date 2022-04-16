@@ -23,7 +23,7 @@ describe 'POST /memes' do
 
     post '/memes', request_body.to_json, { 'CONTENT_TYPE' => 'application/json', 'HTTP_HOST' => 'foobar.org' }
 
-    expect(last_response.status).to eq 307
+    expect(last_response.status).to eq 303
     expect(last_response.location).to eq('http://foobar.org/memes/mickey.jpg')
   end
 end

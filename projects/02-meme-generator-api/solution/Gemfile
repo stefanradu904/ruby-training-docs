@@ -1,0 +1,12 @@
+source 'https://rubygems.org'
+
+gem 'sinatra'
+gem 'mini_magick'
+gem 'thin'
+gem 'rspec'
+gem 'rack-test'
+gem 'eventmachine', '1.2.7', git: 'https://github.com/eventmachine/eventmachine.git', tag: 'v1.2.7'
+gem 'down'
+gem 'fileutils'
+
+gem 'pry'
